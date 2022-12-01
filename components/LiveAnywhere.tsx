@@ -1,4 +1,3 @@
-import React from 'react'
 import { CardsData } from '../typings';
 import MiddleCard from './MiddleCard'
 

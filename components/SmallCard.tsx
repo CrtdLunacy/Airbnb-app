@@ -1,5 +1,5 @@
 import Image from "next/image"
-import { ExploreData } from "../app/page"
+import { ExploreData } from "../typings"
 
 function SmallCard({img, location, distance}: ExploreData) {
   return (

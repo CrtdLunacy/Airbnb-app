@@ -1,4 +1,3 @@
-import React from 'react'
 import { ExploreData } from '../typings'
 import SmallCard from './SmallCard'
 
