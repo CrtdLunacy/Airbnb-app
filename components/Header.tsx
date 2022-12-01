@@ -2,14 +2,36 @@
 
 import Image from 'next/image'
 import { ChangeEvent, useState } from 'react'
-import { MagnifyingGlassCircleIcon, GlobeAltIcon, UserCircleIcon, UserIcon, Bars3Icon } from '@heroicons/react/24/outline'
+import { MagnifyingGlassCircleIcon, GlobeAltIcon, UserCircleIcon, UsersIcon, Bars3Icon } from '@heroicons/react/24/outline'
+import 'react-date-range/dist/styles.css'
+import 'react-date-range/dist/theme/default.css'
+import { DateRangePicker } from 'react-date-range';
+
 
 function Header() {
   const [value, setValue] = useState('');
+  const [guestNum, setGuestNum] = useState(1);
+  const [startDate, setStartDate] = useState(new Date());
+  const [endDate, setEndDate] = useState(new Date());
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setValue(e.target.value);
   }
+
+  const handleChangeGuestNum = (e: ChangeEvent<HTMLInputElement>) => {
+    setGuestNum(Number(e.target.value));
+  }
+
+  const handleSelect = (ranges: any) => {
+    setStartDate(ranges.selection.startDate);
+    setEndDate(ranges.selection.endDate);
+  }
+
+  const selectionRange = {
+    startDate: startDate,
+    endDate: endDate,
+    key: 'selection',
+  };
 
   return (
     <header className='sticky top-0 z-50 grid grid-cols-3 bg-white shadow-md p-5 md:px-10  '>
@@ -43,6 +65,32 @@ function Header() {
            <UserCircleIcon className='h-6 cursor-pointer' />
         </div>
       </div>
+
+      {value && (
+        <div className='flex flex-col col-span-3 mx-auto'>
+          <DateRangePicker
+            ranges={[selectionRange]}
+            minDate={new Date()}
+            rangeColors={['#FD5B61']}
+            onChange={handleSelect}
+          />
+          <div className='flex items-center border-b mb-4'>
+            <h2 className='text-2xl flex-grow font-semibold'>Number of Guests</h2>
+
+            <UsersIcon className='h-5' />
+            <input
+              value={guestNum}
+              onChange={handleChangeGuestNum}
+              min={1}
+              type="number"
+              className='w-12 pl-2 text-lg outline-none text-red-400' />
+          </div>
+          <div className='flex '>
+            <button onClick={() => setValue('')} className='flex-grow text-gray-500'>Cancel</button>
+            <button className='flex-grow text-red-400'>Search</button>
+          </div>
+        </div>
+      )}
     </header>
   )
 }

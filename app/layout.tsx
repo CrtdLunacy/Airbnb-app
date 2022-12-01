@@ -1,4 +1,5 @@
 import Banner from '../components/Banner'
+import Footer from '../components/Footer'
 import Header from '../components/Header'
 import '../styles/globals.css'
 
@@ -14,10 +15,8 @@ export default function RootLayout({
       </head>
       <body>
         <Header />
-        <Banner />
-        <main className='max-w-7xl mx-auto px-8 sm:px-16 '>
         {children}
-        </main>
+        <Footer />
       </body>
     </html>
   )

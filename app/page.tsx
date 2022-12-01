@@ -1,3 +1,4 @@
+import Banner from '../components/Banner';
 import Exploration from '../components/Exploration'
 import LargeCard from '../components/LargeCard';
 import LiveAnywhere from '../components/LiveAnywhere';
@@ -13,14 +14,17 @@ async function Home() {
 
   return (
     <>
-      <Exploration data={exploreData} />
-      <LiveAnywhere data={cardsData} />
-      <LargeCard
-        img='https://links.papareact.com/4cj'
-        title='The Greatest Outdoors'
-        description='Whishlist curated by Airbnb'
-        buttonText='Get Inspired'
-      />
+      <Banner />
+      <main className='max-w-7xl mx-auto px-8 sm:px-16'>
+        <Exploration data={exploreData} />
+        <LiveAnywhere data={cardsData} />
+        <LargeCard
+          img='https://links.papareact.com/4cj'
+          title='The Greatest Outdoors'
+          description='Whishlist curated by Airbnb'
+          buttonText='Get Inspired'
+        />
+      </main>
     </>
   )
 }
