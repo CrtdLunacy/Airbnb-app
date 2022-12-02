@@ -6,6 +6,7 @@ import { MagnifyingGlassCircleIcon, GlobeAltIcon, UserCircleIcon, UsersIcon, Bar
 import 'react-date-range/dist/styles.css'
 import 'react-date-range/dist/theme/default.css'
 import { DateRangePicker } from 'react-date-range';
+import { useRouter } from 'next/navigation'
 
 
 function Header() {
@@ -13,6 +14,7 @@ function Header() {
   const [guestNum, setGuestNum] = useState(1);
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
+  const router = useRouter();
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setValue(e.target.value);
@@ -27,6 +29,10 @@ function Header() {
     setEndDate(ranges.selection.endDate);
   }
 
+  const search = () => {
+    router.push(`/search/?location=${value}&startDate=${startDate.toISOString()}&endDate=${endDate.toISOString()}&guests=${guestNum}`)
+  }
+
   const selectionRange = {
     startDate: startDate,
     endDate: endDate,
@@ -35,7 +41,7 @@ function Header() {
 
   return (
     <header className='sticky top-0 z-50 grid grid-cols-3 bg-white shadow-md p-5 md:px-10  '>
-      <div className='relative flex items-center h-10 cursor-pointer my-auto'>
+      <div onClick={() => router.push('/')} className='relative flex items-center h-10 cursor-pointer my-auto'>
         <Image
           src='https://links.papareact.com/qd3'
           layout='fill'
@@ -87,7 +93,7 @@ function Header() {
           </div>
           <div className='flex '>
             <button onClick={() => setValue('')} className='flex-grow text-gray-500'>Cancel</button>
-            <button className='flex-grow text-red-400'>Search</button>
+            <button onClick={search} className='flex-grow text-red-400'>Search</button>
           </div>
         </div>
       )}

@@ -15,7 +15,7 @@ async function Home() {
   return (
     <>
       <Banner />
-      <main className='max-w-7xl mx-auto px-8 sm:px-16'>
+      <div className='max-w-7xl mx-auto px-8 sm:px-16'>
         <Exploration data={exploreData} />
         <LiveAnywhere data={cardsData} />
         <LargeCard
@@ -24,7 +24,7 @@ async function Home() {
           description='Whishlist curated by Airbnb'
           buttonText='Get Inspired'
         />
-      </main>
+      </div>
     </>
   )
 }
