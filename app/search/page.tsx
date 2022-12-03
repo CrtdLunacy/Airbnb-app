@@ -16,7 +16,8 @@ async function SearchPage({ searchParams }: SearchProps) {
   const formattedStartDate = format(new Date(searchParams.startDate), 'dd MMMM yy');
   const formattedEndDate = format(new Date(searchParams.endDate), 'dd MMMM yy');
   const range = `${formattedStartDate} - ${formattedEndDate}`;
-  const searchResults: Array<InfoCardData> = await fetch('https://www.jsonkeeper.com/b/5NPS').then(res => res.json());
+  const res = await fetch('https://www.jsonkeeper.com/b/5NPS');
+  const searchResults: Array<InfoCardData> = await res.json();
 
   return (
     <div className='flex'>
