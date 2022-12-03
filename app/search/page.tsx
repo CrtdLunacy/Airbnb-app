@@ -5,16 +5,16 @@ import { InfoCardData } from "../../typings";
 
 export type SearchProps = {
   searchParams: {
-    location: string;
-    startDate: string;
-    endDate: string;
-    guests: string;
+    location: string | null;
+    startDate: string | number | Date;
+    endDate: string | number | Date;
+    guests: string | null;
   }
 }
 
 async function SearchPage({ searchParams }: SearchProps) {
-  const formattedStartDate = format(new Date(searchParams.startDate), 'dd MMMM yy');
-  const formattedEndDate = format(new Date(searchParams.endDate), 'dd MMMM yy');
+  const formattedStartDate = searchParams.startDate && format(new Date(searchParams.startDate), 'dd MMMM yy');
+  const formattedEndDate = searchParams.endDate && format(new Date(searchParams.endDate), 'dd MMMM yy');
   const range = `${formattedStartDate} - ${formattedEndDate}`;
   const res = await fetch('https://www.jsonkeeper.com/b/5NPS');
   const searchResults: Array<InfoCardData> = await res.json();
