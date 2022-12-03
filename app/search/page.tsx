@@ -1,5 +1,6 @@
 import { format } from "date-fns";
 import InfoCard from "../../components/InfoCard";
+import MapComp from "../../components/MapComp";
 import { InfoCardData } from "../../typings";
 
 export type SearchProps = {
@@ -16,7 +17,6 @@ async function SearchPage({ searchParams }: SearchProps) {
   const formattedEndDate = format(new Date(searchParams.endDate), 'dd MMMM yy');
   const range = `${formattedStartDate} - ${formattedEndDate}`;
   const searchResults: Array<InfoCardData> = await fetch('https://www.jsonkeeper.com/b/5NPS').then(res => res.json());
-  console.log(searchResults);
 
   return (
     <div className='flex'>
@@ -49,6 +49,8 @@ async function SearchPage({ searchParams }: SearchProps) {
         </div>
 
       </section>
+
+      <MapComp searchResults={searchResults} />
     </div>
   )
 }

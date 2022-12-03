@@ -11,3 +11,7 @@
     @apply absolute box-border w-[100%] h-[100%] rounded-[50%]
   }
 }
+
+.mapboxgl-ctrl-bottom-right {
+  display: none !important;
+}
