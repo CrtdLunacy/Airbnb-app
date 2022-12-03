@@ -13,9 +13,11 @@
     "react": "^18.2.0",
     "react-date-range": "^1.4.0",
     "react-dom": "18.2.0",
+    "react-spinners": "^0.13.7",
     "tailwind-scrollbar-hide": "^1.1.7"
   },
   "devDependencies": {
+    "@kamona/tailwindcss-perspective": "^0.1.1",
     "@types/node": "18.11.3",
     "@types/react": "18.0.21",
     "@types/react-dom": "18.0.6",

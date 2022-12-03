@@ -6,7 +6,7 @@ import { MagnifyingGlassCircleIcon, GlobeAltIcon, UserCircleIcon, UsersIcon, Bar
 import 'react-date-range/dist/styles.css'
 import 'react-date-range/dist/theme/default.css'
 import { DateRangePicker } from 'react-date-range';
-import { useRouter } from 'next/navigation'
+import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 
 
 function Header() {
@@ -15,6 +15,12 @@ function Header() {
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
   const router = useRouter();
+  const pathName = usePathname();
+  const searchParams = useSearchParams();
+  const searchData = {
+    location: searchParams.get('location'),
+    guests: searchParams.get('guests'),
+  };
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setValue(e.target.value);
@@ -31,6 +37,7 @@ function Header() {
 
   const search = () => {
     router.push(`/search/?location=${value}&startDate=${startDate.toISOString()}&endDate=${endDate.toISOString()}&guests=${guestNum}`)
+    setValue('')
   }
 
   const selectionRange = {
@@ -54,7 +61,7 @@ function Header() {
       <div className='flex items-center md:border-2 rounded-full py-2 md:shadow-sm'>
         <input
           type="text"
-          placeholder='Start your search...'
+          placeholder={(pathName === '/search') ? `${searchData.location} | ${searchData.guests}` : 'Start your search...'}
           className='pl-5 bg-transparent outline-none flex-grow text-gray-600 placeholder-gray-400'
           value={value}
           onChange={handleChange}

@@ -1,6 +1,8 @@
 import { format } from "date-fns";
+import InfoCard from "../../components/InfoCard";
+import { InfoCardData } from "../../typings";
 
-type SearchProps = {
+export type SearchProps = {
   searchParams: {
     location: string;
     startDate: string;
@@ -9,11 +11,12 @@ type SearchProps = {
   }
 }
 
-function SearchPage({ searchParams }: SearchProps) {
+async function SearchPage({ searchParams }: SearchProps) {
   const formattedStartDate = format(new Date(searchParams.startDate), 'dd MMMM yy');
   const formattedEndDate = format(new Date(searchParams.endDate), 'dd MMMM yy');
   const range = `${formattedStartDate} - ${formattedEndDate}`;
-  console.log(searchParams)
+  const searchResults: Array<InfoCardData> = await fetch('https://www.jsonkeeper.com/b/5NPS').then(res => res.json());
+  console.log(searchResults);
 
   return (
     <div className='flex'>
@@ -29,6 +32,22 @@ function SearchPage({ searchParams }: SearchProps) {
           <p className='button'>Rooms and Beds</p>
           <p className='button'>More filters</p>
         </div>
+
+        <div className="flex flex-col">
+          {searchResults.map (item  => (
+            <InfoCard
+              key={item.img}
+              img={item.img}
+              location={item.location}
+              title={item.title}
+              description={item.description}
+              star={item.star}
+              price={item.price}
+              total={item.total}
+            />
+          ))}
+        </div>
+
       </section>
     </div>
   )
